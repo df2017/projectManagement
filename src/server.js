@@ -1,13 +1,11 @@
+const express = require("express");
 const app = express();
+const port = 3000;
+const path = require("path");
 
-let ruta = path.join(__dirname+'/projectManagement/src/index.html')
-let ruta2 = path.join(__dirname)
-console.log('ruta1', ruta)
-console.log('ruta2',ruta2)
-app.use(express.static(__dirname+'/projectManagement'));
-app.get('/',function(req,res){
-    console.log('ruta2', ruta)
-    res.sendFile(path.join(__dirname+'/projectManagement/src/index.html'));
+app.use(express.static(__dirname + "/projectManagement"));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.listen(process.env.PORT || 8080);
+app.listen(port);
