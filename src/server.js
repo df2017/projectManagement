@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
-const port = 3000;
-const path = require("path");
+const port = 8080;
 
-app.use(express.static(__dirname + "/projectManagement"));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+app.use(express.static('./dist/project-management'));
+app.get('/*', function(req, res) {
+  res.sendFile('index.html', {root: 'dist/project-management/'});
 });
 
-app.listen(port);
+app.listen(process.env.PORT || port);
