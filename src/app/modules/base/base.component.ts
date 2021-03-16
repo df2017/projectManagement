@@ -6,15 +6,13 @@ import { Component, OnInit } from '@angular/core';
       <img class="logo" src="/assets/images/logo.png" alt="" />
   </app-header>
   <app-navbar></app-navbar>
-  `,
-  styleUrls: [
-
-  ]
+  <router-outlet></router-outlet>`,
+  styleUrls: []
 })
 export class BaseComponent implements OnInit {
 
   pathLogo: string = '../../../assets/images/logo.png';
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }

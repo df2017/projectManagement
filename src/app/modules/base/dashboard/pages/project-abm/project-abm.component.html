@@ -1,1 +1,56 @@
-<p>project-abm works!</p>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <div class="row justify-content-center mt-3" id="form-abm">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label">Project Name</label>
+                <input class="form-control" formControlName="nameProject"  type="text">
+                <div *ngIf="validatedInput('nameProject', form, submitted)" class="text-danger">
+                    <small *ngIf="form.controls.nameProject.errors.required">*Project name is required</small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <input class="form-control" formControlName="description"  type="text">
+                <div *ngIf="validatedInput('description', form, submitted)" class="text-danger">
+                    <small *ngIf="form.controls.description.errors.required">*Description is required</small>
+                </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Project Manager</label>
+              <select  class="form-control" formControlName="manager">
+                <option *ngFor="let item of listManager" [value]="item.name">{{item.name}}</option>
+              </select>
+              <div *ngIf="validatedInput('manager', form, submitted)" class="text-danger">
+                  <small *ngIf="form.controls.manager.errors.required">*Project Manager is required</small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Assigned to</label>
+              <select  class="form-control" formControlName="assigned">
+                <option *ngFor="let item of listDeveloper" [value]="item.name">{{item.name}}</option>
+              </select>
+              <div *ngIf="validatedInput('assigned', form, submitted)" class="text-danger">
+                  <small *ngIf="form.controls.assigned.errors.required">*Assigned to is required</small>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select  class="form-control" formControlName="status">
+                <option *ngFor="let item of listStatus" [value]="item.name">{{item.name}}</option>
+              </select>
+              <div *ngIf="validatedInput('status', form, submitted)" class="text-danger">
+                  <small *ngIf="form.controls.status.errors.required">*Status is required</small>
+              </div>
+            </div>
+
+          <div class="col-12 d-flex  justify-content-start ml-2">
+            <button class="btn-general" type="submit">{{buttonText}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

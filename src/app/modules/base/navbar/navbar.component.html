@@ -1,4 +1,10 @@
 <nav class="col-12 navbar-component">
-  <h4 class="title-navbar">Project Management</h4>
-  <button class="btn-navbar">+ Add project</button>
+  <h4 class="title-navbar">
+    <a class="back-link" *ngIf="showIcon" [routerLink]="['./']">
+      <i  class="fas fa-arrow-left fa-1x"></i>
+      Back</a>
+
+    {{$breadcrumbTitle | async}}</h4>
+  <button class="btn-general" *ngIf="!showIcon"
+    [routerLink]="['/addProject']">+ Add project</button>
 </nav>

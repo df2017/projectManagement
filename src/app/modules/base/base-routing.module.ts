@@ -3,13 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './base.component';
 
 const routes: Routes = [
-  {path: '', component: BaseComponent,
-  children: [
-    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-    {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
-
-  ]
-}
+  {path: '', component: BaseComponent, children: [
+    {path: '', redirectTo: 'home', pathMatch: 'full'},
+    {path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)},
+  ]}
 ];
 
 @NgModule({

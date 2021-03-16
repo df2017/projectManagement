@@ -1,1 +1,38 @@
-<p>project-list works!</p>
+<div class="container-table">
+  <div class="table-responsive">
+    <table  class="table table-striped">
+      <thead>
+        <th *ngFor="let col of columns">{{col}}</th>
+        <th class="text-center">Acciones</th>
+      </thead>
+      <tbody>
+        <tr *ngIf="projectService.data.length === 0">
+          <th colspan="5" class="text-center">No hay Datos para mostrar</th>
+        </tr>
+        <ng-container  *ngIf="projectService.data.length > 0">
+          <tr *ngFor="let item of projectService.$projects | async">
+            <td class="items-table">{{ item.nameProject }}
+              <br><h6 class="date-create-item">{{item.createdAt}}</h6></td>
+            <td  class="items-table">{{ item.manager }}</td>
+            <td  class="items-table">{{ item.assigned }}</td>
+            <td  class="items-table">{{ item.status }}</td>
+            <td class="text-center items-table">
+              <div class="btn-group">
+                <button type="button" class="btn-dropdrown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item"
+                    (click)="updateProject(item)"><i class="far fa-edit"></i> Edit</a>
+                  <a class="dropdown-item"
+                    (click)="deleteProject(item.id)"><i class="far fa-trash-alt"></i> Delete</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
