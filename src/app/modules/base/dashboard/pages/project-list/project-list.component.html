@@ -1,7 +1,19 @@
 <div class="container-table">
+  <div class="row justify-content-end mr-1 ml-1">
+    <div class="col-sm-12 col-md-8 col-lg-6 col-xl-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-sm">Search</span>
+        </div>
+        <input type="text" class="form-control" (keyup)="searchProject($event.target.value)"
+            placeholder="Search">
+      </div>
+    </div>
+  </div>
+
   <div class="table-responsive">
     <table  class="table table-striped">
-      <thead>
+      <thead class="hiddenColumnMobile">
         <th *ngFor="let col of columns">{{col}}</th>
         <th class="text-center">Acciones</th>
       </thead>
@@ -14,8 +26,8 @@
             <td class="items-table">{{ item.nameProject }}
               <br><h6 class="date-create-item">{{item.createdAt}}</h6></td>
             <td  class="items-table">{{ item.manager }}</td>
-            <td  class="items-table">{{ item.assigned }}</td>
-            <td  class="items-table">{{ item.status }}</td>
+            <td  class="items-table hiddenColumnMobile">{{ item.assigned }}</td>
+            <td  class="items-table hiddenColumnMobile">{{ item.status }}</td>
             <td class="text-center items-table">
               <div class="btn-group">
                 <button type="button" class="btn-dropdrown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

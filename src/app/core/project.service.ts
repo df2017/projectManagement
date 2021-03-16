@@ -20,6 +20,10 @@ export class ProjectService {
     return resutlSearch;
   }
 
+  listSearchProject(searchData){
+    this.$projects.next(searchData);
+  }
+
   addProject(params: Project): ProjectService {
     this.data.push(params)
     this.$projects.next(this.data);

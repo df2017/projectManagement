@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectService } from 'src/app/core/project.service';
 import swal from 'sweetalert2';
-import { NavbarComponent } from '../../../navbar/navbar.component';
 
 @Component({
   selector: 'app-project-list',
@@ -26,6 +25,23 @@ export class ProjectListComponent implements OnInit {
 
   updateProject(dataObject: any) {
     this.router.navigate(['/editProject', { id: dataObject.id }]);
+  }
+
+  searchProject(keyEvent: string){
+    const countLetter = keyEvent?.length;
+    const word = keyEvent.toLowerCase()
+    if(countLetter > 3){
+      const resultAllData = this.projectService.data;
+      const findProject = [];
+      resultAllData.forEach((x) => {
+        if((x.nameProject).substring(0, countLetter).toLowerCase() === word){
+          findProject.push(x)
+        }
+      })
+      this.projectService.listSearchProject(findProject)
+    } else {
+      this.projectService.listProject();
+    }
   }
 
   deleteProject(idDelete: any){

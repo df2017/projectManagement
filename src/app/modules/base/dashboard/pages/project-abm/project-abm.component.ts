@@ -17,6 +17,7 @@ export class ProjectAbmComponent implements OnInit {
   buttonText: string = "Create Project";
   form: FormGroup;
   params: any;
+  dataForm: any;
 
   listStatus: any = [
     { id: StatusEnum.enabled, name: 'Enabled' },
@@ -75,29 +76,32 @@ export class ProjectAbmComponent implements OnInit {
   }
 
   submit() {
+    this.dataForm = "";
+    this.uuidValue = "";
     this.submitted = true;
-    this.uuidValue = uuid.v4();
     if (this.form.invalid) {
       return;
     } else {
-      const data = this.form.value;
-      if (data.id !== "") {
-        this.projectService.upgradeProject(data.id, data);
+      this.dataForm = this.form.value;
+      this.uuidValue = uuid.v4();
+      if (this.dataForm.id !== "" && this.dataForm.id) {
+        this.projectService.upgradeProject(this.dataForm.id, this.dataForm);
         swal.fire(
           "Success",
           "Project Updated. ok",
         )
       } else {
         const dateNow = moment(new Date()).format('DD/MM/YYYY hh:mm A');
-        data.createdAt = dateNow;
-        data.id = this.uuidValue;
-        const result = this.projectService.addProject(data);
+        this.dataForm.createdAt = dateNow;
+        this.dataForm.id = this.uuidValue;
+        const result = this.projectService.addProject(this.dataForm);
         if(result.data.length > 0){
           swal.fire(
             "Success",
             "Project Created. ok",
           )
           this.submitted = false;
+          this.dataForm = {};
           this.form.reset();
         }
       }
